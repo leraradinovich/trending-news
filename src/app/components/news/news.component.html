@@ -1,9 +1,9 @@
-<div class="news-heading">
+<div class="news-heading" #newsEl>
   <h1 class="news-heading__title">{{ title }}</h1>
 </div>
 <div class="divider divider--news" role="separator" aria-label="Divider"></div>
 
-<main class="news" id="news" #newsEl>
+<main class="news" id="news">
   <div class="news__content">
     <app-search (search)="onSearch($event)"></app-search>
     <div class="news__container">

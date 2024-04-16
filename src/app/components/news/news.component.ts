@@ -37,14 +37,15 @@ export class NewsComponent implements OnInit {
 
     this.newsService.fetchNews(newsIds, this.pagePosition).subscribe((news: News[]) => {
       this.newsArr = news;
+      this.scrollToEl();
     });
   }
 
   onPageChange(event: number) {
     this.newsArr = [];
-    this.scrollToEl();
     this.pagePosition = event;
     this.pageFilteredPosition = event;
+    this.scrollToEl();
 
     if (this.isSearchValue) {
       this.newsArr = this.filteredNews[this.pageFilteredPosition] as News[];

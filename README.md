@@ -4,9 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 TEST CODE ON DEVELOP BRANCH
 
-## Link 
+## Link
 
-https://trending-news.onrender.com/
+[Live Demo](https://trending-news.onrender.com/)
 
 ## Local
 
@@ -16,8 +16,8 @@ https://trending-news.onrender.com/
 
 ## Development server
 
-Run `ng serve` for a dev server. 
-Navigate to `http://localhost:4200/`. 
+Run `ng serve` for a dev server.
+Navigate to `http://localhost:4200/`.
 The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
