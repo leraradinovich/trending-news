@@ -7,7 +7,7 @@
   <div class="news__content">
     <app-search (search)="onSearch($event)"></app-search>
     <div class="news__container">
-      @if (newsArr?.length) {
+      @if (newsArr.length) {
         @for (news of newsArr; track news) {
           <app-news-item [news]="news"></app-news-item>
         }
@@ -23,7 +23,7 @@
           <app-loading-placeholder></app-loading-placeholder>
         }
       }
-      @if (!newsArr?.length && isSearchValue) {
+      @if (!newsArr.length && isSearchValue) {
         {{ 'No bad news for you today...' }}
       }
     </div>
