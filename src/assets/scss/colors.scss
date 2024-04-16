@@ -1,0 +1,53 @@
+$palettes: (
+  grayscale: (
+    1000: #2c2c2c,
+    900: #4b4b4d,
+    800: #5e5f61,
+    700: #737375,
+    600: #87888a,
+    500: #9d9e9f,
+    400: #b3b4b5,
+    300: #c9cacc,
+    200: #e0e1e3,
+    100: #b9be9a,
+    50: #f8f9fa,
+    dark: #4b4b4d,
+    light: #f8f9fa,
+  ),
+  bright: (
+    blue: oklch(51.01% 0.274 263.83),
+  ),
+  electric: (
+    violet: oklch(53.18% 0.28 296.97),
+  ),
+  french: (
+    violet: oklch(47.66% 0.246 305.88),
+  ),
+  vivid: (
+    pink: oklch(69.02% 0.277 332.77),
+  ),
+  hot: (
+    red: oklch(61.42% 0.238 15.34),
+  ),
+  orange: (
+    red: oklch(63.32% 0.24 31.68),
+  ),
+  red-to-pink-to-purple: (
+    vertical-gradient: linear-gradient(180deg, var(--orange-red) 0%, var(--vivid-pink) 50%, var(--electric-violet) 100%),
+    horizontal-gradient:
+      linear-gradient(90deg, var(--orange-red) 0%, var(--vivid-pink) 50%, var(--electric-violet) 100%),
+  ),
+  pill: (
+    accent: var(--bright-blue),
+  ),
+);
+
+:root,
+:host {
+  @each $colorname, $paleton in $palettes {
+    @each $key, $value in $paleton {
+      $keyname: '--' + $colorname + '-' + $key;
+      #{$keyname}: #{$value};
+    }
+  }
+}

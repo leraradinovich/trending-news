@@ -1,0 +1,23 @@
+<div class="news-heading">
+  <h1 class="news-heading__title">{{ title }}</h1>
+</div>
+<div class="divider divider--news" role="separator" aria-label="Divider"></div>
+
+<main class="news" id="news" #newsEl>
+  <div class="news__content">
+    <div class="news__container">
+      @if (newsArr.length) { @for (news of newsArr; track news) {
+      <app-news-item [news]="news"></app-news-item>
+      }
+      <app-pagination
+        [currentPage]="pagePosition"
+        [itemsPerPage]="itemsPerPage"
+        [totalItems]="newsIds.length"
+        (pageChanged)="onPageChange($event)"
+      ></app-pagination>
+      } @if (newsService.isNewsLoading) { @for (placeholder of [].constructor(itemsPerPage); track placeholder) {
+      <app-loading-placeholder></app-loading-placeholder>
+      } }
+    </div>
+  </div>
+</main>

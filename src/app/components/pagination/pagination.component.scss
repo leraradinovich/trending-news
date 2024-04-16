@@ -1,0 +1,40 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0 0;
+}
+
+.pagination__page {
+  font-size: 14px;
+  color: var(--grayscale-700);
+}
+
+.pagination__button {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  margin: 8px;
+  --pill-accent: var(--bright-blue);
+  background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
+  color: var(--pill-accent);
+  border-radius: 16px;
+  border: 0;
+  transition: background 0.3s ease;
+  font-family: var(--inter-font);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.pagination__button:hover {
+  background: color-mix(in srgb, var(--pill-accent) 15%, transparent);
+}
+
+.pagination__button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
