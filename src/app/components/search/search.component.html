@@ -1,0 +1,10 @@
+<div class="search">
+  <input
+    class="search__input"
+    type="text"
+    name="news-search"
+    [(ngModel)]="inputText"
+    placeholder="Search news....."
+    (input)="onSearch(inputText)"
+  />
+</div>

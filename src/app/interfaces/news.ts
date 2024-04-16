@@ -9,3 +9,7 @@ export interface News {
   type: string;
   url: string;
 }
+
+export interface CachedNews {
+  [key: string]: News[];
+}

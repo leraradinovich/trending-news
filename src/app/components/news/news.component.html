@@ -5,19 +5,27 @@
 
 <main class="news" id="news" #newsEl>
   <div class="news__content">
+    <app-search (search)="onSearch($event)"></app-search>
     <div class="news__container">
-      @if (newsArr.length) { @for (news of newsArr; track news) {
-      <app-news-item [news]="news"></app-news-item>
+      @if (newsArr?.length) {
+        @for (news of newsArr; track news) {
+          <app-news-item [news]="news"></app-news-item>
+        }
+        <app-pagination
+          [currentPage]="isSearchValue ? pageFilteredPosition : pagePosition"
+          [itemsPerPage]="itemsPerPage"
+          [totalItems]="isSearchValue ? filteredNewsCount : newsIds.length"
+          (pageChanged)="onPageChange($event)"
+        ></app-pagination>
       }
-      <app-pagination
-        [currentPage]="pagePosition"
-        [itemsPerPage]="itemsPerPage"
-        [totalItems]="newsIds.length"
-        (pageChanged)="onPageChange($event)"
-      ></app-pagination>
-      } @if (newsService.isNewsLoading) { @for (placeholder of [].constructor(itemsPerPage); track placeholder) {
-      <app-loading-placeholder></app-loading-placeholder>
-      } }
+      @if (newsService.isNewsLoading) {
+        @for (placeholder of [].constructor(itemsPerPage); track placeholder) {
+          <app-loading-placeholder></app-loading-placeholder>
+        }
+      }
+      @if (!newsArr?.length && isSearchValue) {
+        {{ 'No bad news for you today...' }}
+      }
     </div>
   </div>
 </main>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { News } from '../../interfaces/news';
+import { News, CachedNews } from '../../interfaces/news';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,7 @@ import { News } from '../../interfaces/news';
 export class NewsService {
   isNewsLoading = true;
   // Store news per page
-  private dataCache: { [key: number]: any[] } = {};
+  dataCache: CachedNews = {};
   private baseUrl = 'https://hacker-news.firebaseio.com/v0/';
 
   constructor(private http: HttpClient) {}
@@ -47,5 +47,29 @@ export class NewsService {
         }),
       );
     }
+  }
+
+  searchByTitle(query: string, itemsPerPage: number): CachedNews {
+    const result: CachedNews = {};
+    let currentPage = 1;
+    let remainingItems = itemsPerPage;
+
+    Object.keys(this.dataCache).forEach((page) => {
+      this.dataCache[page].forEach((item: News) => {
+        if (remainingItems === 0) {
+          currentPage++;
+          remainingItems = itemsPerPage;
+        }
+        if (!result[currentPage]) {
+          result[currentPage] = [];
+        }
+        if (item.title.toLowerCase().includes(query.toLowerCase())) {
+          result[currentPage].push(item);
+          remainingItems--;
+        }
+      });
+    });
+
+    return result;
   }
 }
