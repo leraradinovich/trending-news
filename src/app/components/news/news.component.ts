@@ -37,7 +37,6 @@ export class NewsComponent implements OnInit {
 
     this.newsService.fetchNews(newsIds, this.pagePosition).subscribe((news: News[]) => {
       this.newsArr = news;
-      this.scrollToEl();
     });
   }
 
@@ -55,7 +54,7 @@ export class NewsComponent implements OnInit {
   }
 
   scrollToEl(): void {
-    this.newsEl.nativeElement.scrollIntoView({
+    this.newsEl?.nativeElement?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
       inline: 'nearest',
