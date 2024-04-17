@@ -36,7 +36,6 @@ export class NewsComponent implements OnInit {
     );
 
     this.newsService.fetchNews(newsIds, this.pagePosition).subscribe((news: News[]) => {
-      console.log(33, news);
       this.newsArr = news;
     });
   }
