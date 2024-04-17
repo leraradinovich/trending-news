@@ -9,7 +9,7 @@ import { CachedNews, News } from '../../interfaces/news';
 })
 export class NewsComponent implements OnInit {
   title = 'Trending News';
-  newsIds: number[] = [];
+  newsIds: any[] = [];
   newsArr: News[] = [];
   itemsPerPage = 10;
   pagePosition = 1;
@@ -36,6 +36,7 @@ export class NewsComponent implements OnInit {
     );
 
     this.newsService.fetchNews(newsIds, this.pagePosition).subscribe((news: News[]) => {
+      console.log(33, news);
       this.newsArr = news;
     });
   }

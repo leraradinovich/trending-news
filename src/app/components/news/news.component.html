@@ -9,7 +9,9 @@
     <div class="news__container">
       @if (newsArr.length) {
         @for (news of newsArr; track news) {
-          <app-news-item [news]="news"></app-news-item>
+          @if (news) {
+            <app-news-item [news]="news"></app-news-item>
+          }
         }
         <app-pagination
           [currentPage]="isSearchValue ? pageFilteredPosition : pagePosition"

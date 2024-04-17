@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, combineLatestAll, map, mergeAll, mergeMap, raceWith, tap } from 'rxjs/operators';
 import { News, CachedNews } from '../../interfaces/news';
 
 @Injectable({
@@ -31,7 +31,15 @@ export class NewsService {
       return of(this.dataCache[page]);
     } else {
       this.isNewsLoading = true;
-      const requests = newsIds.map((id) => this.http.get(`${this.baseUrl}item/${id}.json`));
+      const requests = newsIds.map((id) =>
+        this.http.get(`${this.baseUrl}item/${id}.json`).pipe(
+          catchError((error) => {
+            console.error('Error fetching news item:', error);
+            return of(undefined);
+          }),
+        ),
+      );
+
       return forkJoin(requests).pipe(
         map((responses: any[]) => responses.map((response) => response as News)),
         tap((news: News[]) => {
